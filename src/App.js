@@ -7,7 +7,8 @@ import Login from './component/login';
 import Home from './component/home';
 import Todolist from './component/todolist';
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import Api from './component/api';
+import { Routes, Route , useParams} from 'react-router-dom';
 
 
 class App extends React.Component{
@@ -22,6 +23,10 @@ class App extends React.Component{
   ]
   }
   render(){
+    const Wrapper = (props) => {
+      const params = useParams();
+      return <Todolist flightData={this.users} updateFlight={this.users} {...{...props, match: {params}} } />
+    }
     return (
     <div className="App">
 
@@ -31,7 +36,10 @@ class App extends React.Component{
           <Route path="/home" element={<Home />} />
           <Route path="/register" element={<Register users={this.users} />} />
           <Route path="/login" element={<Login users={this.users} />} />
-          <Route path="/todolist" element={<Todolist />} />
+          <Route path="/api" element={<Api  />} />
+          <Route path="/edit/:id" element={<Wrapper />} />
+
+          <Route path="/todolist/:id?" element={<Todolist />} exact />
          
        </Routes>
 

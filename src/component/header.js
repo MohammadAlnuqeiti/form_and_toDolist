@@ -15,7 +15,8 @@ class Header extends React.Component {
                     <Nav.Link href="/home">Home</Nav.Link>
                     <Nav.Link href="/register">Register</Nav.Link>
                     <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/todolist">To Do list</Nav.Link>
+                    <Nav.Link href="/api">Api</Nav.Link>
+                    <Nav.Link href="/todolist/1">To Do list</Nav.Link>
                 </Nav>
                 </Container>
             </Navbar>
