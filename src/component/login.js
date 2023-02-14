@@ -45,6 +45,8 @@ if(name==="email"){
         this.users.map((ele)=>{
             if(ele.email===this.state.email && ele.password===this.state.password && this.state.email!=="" && this.state.password !==""){
                   console.log(true);
+                  window.localStorage.setItem('email',this.state.email)
+
                   window.location.assign('/home')
 
                   
@@ -77,7 +79,7 @@ if(name==="email"){
                         <div className='password'>
                         <label htmlFor="password">Password</label>
                         <input type='password' name='password' onBlur={this.handleBlur} noValidate />
-                        <p className="error" id="err"></p>
+                        <p className="errorr" id="err"></p>
 
                         </div>
 

@@ -105,7 +105,9 @@ class Register extends React.Component{
           console.info('Valid Form')
           let newUser ={fullName:this.state.fullName,email:this.state.email,password:this.state.password}
           this.users.push(newUser);
-          localStorage.setItem('users',JSON.stringify(this.users))
+          window.location.pathname = "/login";
+
+          // localStorage.setItem('users',JSON.stringify(this.users))
         }else{
           console.error('Invalid Form')
         }

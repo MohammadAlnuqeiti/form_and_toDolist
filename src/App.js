@@ -8,6 +8,9 @@ import Home from './component/home';
 import Todolist from './component/todolist';
 import React from 'react';
 import Api from './component/api';
+import ListUser from './component/listUser';
+import EditUser from './component/editUser';
+import CreateUser from './component/createUser';
 import { Routes, Route , useParams} from 'react-router-dom';
 
 
@@ -37,6 +40,9 @@ class App extends React.Component{
           <Route path="/register" element={<Register users={this.users} />} />
           <Route path="/login" element={<Login users={this.users} />} />
           <Route path="/api" element={<Api  />} />
+          <Route path="/user" element={<ListUser  />} />
+          <Route path="/user/create" element={<CreateUser  />} />
+          <Route path="/user/:id/edit" element={<EditUser  />} />
           <Route path="/edit/:id" element={<Wrapper />} />
 
           <Route path="/todolist/:id?" element={<Todolist />} exact />

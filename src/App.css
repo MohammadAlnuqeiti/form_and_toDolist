@@ -42,11 +42,11 @@ SILVER PINK: #C9ADA7
   margin: auto;
   margin-top: 50px;
 }
-.error{
+.errorr{
   display: none;
   color: red;
-  font-size: 8px;
-  margin-top: -4px;
+  font-size: 13px;
+  margin-top: -2px;
 }
 .form-wrapper > h2 {
   display: flex;
