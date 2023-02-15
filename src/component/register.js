@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import axios from "axios";
+
 import { json } from 'react-router-dom';
 
 const validEmailRegex = 
@@ -105,7 +107,13 @@ class Register extends React.Component{
           console.info('Valid Form')
           let newUser ={fullName:this.state.fullName,email:this.state.email,password:this.state.password}
           this.users.push(newUser);
-          window.location.pathname = "/login";
+          let inputs = {fullName:this.state.fullName,email:this.state.email,phone:this.state.repassword,password:this.state.password}
+          axios.post("http://localhost:80/REACT/back_end_react/api/user/save",inputs)
+          .then((respone)=>{
+              console.log(respone.data);
+              window.location.pathname = "/login";
+          })
+  
 
           // localStorage.setItem('users',JSON.stringify(this.users))
         }else{

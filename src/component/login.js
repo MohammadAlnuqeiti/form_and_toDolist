@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from "axios";
+
 
 export default class Login extends Component {
 
@@ -7,11 +9,22 @@ export default class Login extends Component {
         this.state={
             email:"",
             password:"",
+            users:[],
         }
         this.users =this.props.users
         console.log( this.users);
     }
 
+    componentDidMount = () =>{
+        axios.get("http://localhost:80/REACT/back_end_react/api/users/")
+        .then((respone)=>{
+            this.setState({
+                users:respone.data
+            })
+            // setUsers(respone.data)
+            console.log(respone.data);
+        })
+    }
     handleBlur = (event)=>{
 
     const {name , value}=event.target;
@@ -31,18 +44,18 @@ if(name==="email"){
 
     handleSubmit = (event) => {
         event.preventDefault();
-
+        console.log(this.state.users);
         if (this.state.email==="" || this.state.password==="" ){
             document.getElementById("err").style.display = 'block'
             document.getElementById("err").innerHTML = "**please inter your email and password"
         }
-        this.users.map((ele)=>{
+        this.state.users.map((ele)=>{
         if (ele.email!==this.state.email && ele.password!==this.state.password){
             document.getElementById("err").style.display = 'block'
             document.getElementById("err").innerHTML = "**please inter correct your email and password"
         }
     })
-        this.users.map((ele)=>{
+        this.state.users.map((ele)=>{
             if(ele.email===this.state.email && ele.password===this.state.password && this.state.email!=="" && this.state.password !==""){
                   console.log(true);
                   window.localStorage.setItem('email',this.state.email)
