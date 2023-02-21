@@ -5,6 +5,8 @@ import { json } from 'react-router-dom';
 
 const validEmailRegex = 
   RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+const checkPass=RegExp(/^^[A-Za-z]\w{8,31}$/);
+
   const validateForm = (errors) => {
     let valid = true;
     Object.values(errors).forEach(
@@ -25,6 +27,7 @@ class Register extends React.Component{
           repassword: null,
           test:"",
           accept:false,
+          users:[],
           errors: {
             fullName: '',
             email: '',
@@ -35,6 +38,20 @@ class Register extends React.Component{
         this.users =this.props.users
         console.log( this.users);
       }
+      componentDidMount = () =>{
+        axios.get("http://localhost:80/REACT/back_end_react/api/user.php/users/")
+        .then((respone)=>{
+          let email = respone.data.map((ele) => {
+                return ele.email
+          })
+          console.log(email);
+            this.setState({
+                users:email
+            })
+            // setUsers(respone.data)
+            console.log(respone.data);
+        })
+    }
       handleChange = (event) => {
         console.log(event);
         // event.preventDefault();
@@ -51,18 +68,23 @@ class Register extends React.Component{
             break;
           case 'email': 
             errors.email = 
-              validEmailRegex.test(value)
-                ? ''
-                : 'Email is not valid!';
+              !validEmailRegex.test(value)
+                ? 'Email is not valid!'
+                : this.state.users.includes(value) 
+                ? 'Email is already has been taken'
+                : '' ; 
             break;
           case 'password': 
           this.setState({
             test:value
           })
           errors.password = 
-          value.length < 8 
-          ? 'Password must be 8 characters long!'
-          : '';
+          checkPass.test(value)
+          
+          // value.length < 8 
+
+          ? ''
+          : 'Password must be 8 characters long!';
           break;
           case 'repassword': 
           console.log(this.state.test);
@@ -108,7 +130,7 @@ class Register extends React.Component{
           let newUser ={fullName:this.state.fullName,email:this.state.email,password:this.state.password}
           this.users.push(newUser);
           let inputs = {fullName:this.state.fullName,email:this.state.email,phone:this.state.repassword,password:this.state.password}
-          axios.post("http://localhost:80/REACT/back_end_react/api/user/save",inputs)
+          axios.post("http://localhost:80/REACT/back_end_react/api/user.php/save",inputs)
           .then((respone)=>{
               console.log(respone.data);
               window.location.pathname = "/login";

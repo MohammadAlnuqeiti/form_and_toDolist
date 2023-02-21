@@ -11,6 +11,9 @@ import Api from './component/api';
 import ListUser from './component/listUser';
 import EditUser from './component/editUser';
 import CreateUser from './component/createUser';
+import ListPost from './component/listPost';
+import CreatePost from './component/createPost';
+import EditPost from './component/editPost';
 import { Routes, Route , useParams} from 'react-router-dom';
 
 
@@ -43,6 +46,9 @@ class App extends React.Component{
           <Route path="/user" element={<ListUser  />} />
           <Route path="/user/create" element={<CreateUser  />} />
           <Route path="/user/:id/edit" element={<EditUser  />} />
+          <Route path="/post" element={<ListPost  />} />
+          <Route path="/post/create" element={<CreatePost  />} />
+          <Route path="/post/:id/edit" element={<EditPost  />} />
           <Route path="/edit/:id" element={<Wrapper />} />
 
           <Route path="/todolist/:id?" element={<Todolist />} exact />

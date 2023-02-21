@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import axios from "axios";
 import { useNavigate , useParams} from "react-router-dom";
 
-function EditUser(){
+function EditPost(){
     const navigate=useNavigate();
     const {id} =useParams();
 
@@ -12,10 +12,10 @@ function EditUser(){
         getUser();
 
     },[]);
-
+    
     const getUser = () => {
 
-        axios.get(`http://localhost:80/REACT/back_end_react/api/user.php/${id}`)
+        axios.get(`http://localhost:80/REACT/back_end_react/api/post.php/${id}`)
         .then((respone)=>{
             setInputs(respone.data[0])
             console.log(respone.data[0]);
@@ -34,10 +34,10 @@ function EditUser(){
     const handleSubmit = (event) => {
         event.preventDefault();
 console.log(inputs);
-        axios.put(`http://localhost:80/REACT/back_end_react/api/user.php/${id}/edit`,inputs)
+        axios.put(`http://localhost:80/REACT/back_end_react/api/post.php/${id}/edit`,inputs)
         .then((respone)=>{
             console.log(respone.data);
-            navigate('/user');
+            navigate('/post');
         })
 
 
@@ -53,24 +53,22 @@ console.log(inputs);
                     <form onSubmit={handleSubmit}  >
 
                         <div className='fullName'>
-                        <label htmlFor="fullName">Full Name</label>
+                        <label htmlFor="fullName">Name</label>
                         <input type='text' value={inputs.name} name='name' onChange={handleChange}  />
                         </div>
 
-                        <div className='email'>
-                        <label htmlFor="email">Email</label>
-                        <input type='email' name='email' value={inputs.email} onChange={handleChange}  />
-                        </div>
-                        <div className='email'>
-                        <label htmlFor="email">phone</label>
-                        <input type='text' name='mobile' value={inputs.mobile}  onChange={handleChange}  />
+                        <div className='fullName'>
+                        <label htmlFor="fullName">Title</label>
+                        <input type='text' value={inputs.title} name='title' onChange={handleChange}  />
                         </div>
 
-                        <div className='password'>
-                        <label htmlFor="password">Password</label>
-                        <input type='password' name='password' onChange={handleChange}  />
+                        <div className='fullName'>
+                        <label htmlFor="fullName">Content</label>
+                        <input type='text' value={inputs.content} name='content' onChange={handleChange}  />
                         </div>
-                    
+
+                  
+                 
 
                         <div className='submit'>
                         <button>Create</button>
@@ -81,4 +79,4 @@ console.log(inputs);
     )
 }
 
-export default EditUser
+export default EditPost

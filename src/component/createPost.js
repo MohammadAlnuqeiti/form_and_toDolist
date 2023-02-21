@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function CreateUser(){
+function CreatePost(){
 
     const navigate=useNavigate();
 
@@ -18,10 +18,10 @@ function CreateUser(){
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post("http://localhost:80/REACT/back_end_react/api/user.php/save",inputs)
+        axios.post("http://localhost:80/REACT/back_end_react/api/post.php/save",inputs)
         .then((respone)=>{
             // console.log(respone.data);
-            navigate('/user');
+            navigate('/post');
         })
 
 
@@ -40,24 +40,20 @@ function CreateUser(){
                     <form onSubmit={handleSubmit} noValidate >
 
                         <div className='fullName'>
-                        <label htmlFor="fullName">Full Name</label>
-                        <input type='text' name='fullName' onChange={handleChange} noValidate />
+                        <label htmlFor="fullName">Name</label>
+                        <input type='text' name='name' onChange={handleChange} noValidate />
+                        </div>
+                        <div className='fullName'>
+                        <label htmlFor="fullName">Title</label>
+                        <input type='text' name='title' onChange={handleChange} noValidate />
+                        </div>
+                        <div className='fullName'>
+                        <label htmlFor="fullName">Content</label>
+                        <input type='text' name='content' onChange={handleChange} noValidate />
                         </div>
 
-                        <div className='email'>
-                        <label htmlFor="email">Email</label>
-                        <input type='email' name='email' onChange={handleChange} noValidate />
-                        </div>
-                        <div className='email'>
-                        <label htmlFor="email">phone</label>
-                        <input type='text' name='phone' onChange={handleChange} noValidate />
-                        </div>
+                     
 
-                        <div className='password'>
-                        <label htmlFor="password">Password</label>
-                        <input type='password' name='password' onChange={handleChange} noValidate />
-                        </div>
-                    
 
                         <div className='submit'>
                         <button>Create</button>
@@ -68,4 +64,4 @@ function CreateUser(){
     )
 }
 
-export default CreateUser
+export default CreatePost

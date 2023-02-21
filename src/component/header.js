@@ -21,7 +21,9 @@ class Header extends React.Component {
                    <Nav.Link href="/api">Api</Nav.Link>
                    <Nav.Link href="/user">User</Nav.Link>
                    <Nav.Link href="/user/create">User create</Nav.Link>
-                   <Nav.Link href="/user/1/edit">User edit</Nav.Link>
+                   <Nav.Link href="/post">Posts</Nav.Link>
+                   <Nav.Link href="/post/create">Post create</Nav.Link>
+                   {/* <Nav.Link href="/user/:id/edit">User edit</Nav.Link> */}
                    <Nav.Link href="/todolist/1">To Do list</Nav.Link>
 
                   </div>

@@ -7,9 +7,9 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom";
 
 
-function ListUser(){
+function ListPost(){
 
-    const [users,setUsers] = useState([]);
+    const [posts,setPosts] = useState([]);
 
     useEffect(()=>{
         getUsers();
@@ -17,14 +17,14 @@ function ListUser(){
     },[]);
     const getUsers = () => {
 
-        axios.get("http://localhost:80/REACT/back_end_react/api/user.php/users")
+        axios.get("http://localhost:80/REACT/back_end_react/api/post.php/")
         .then((respone)=>{
-            setUsers(respone.data)
+            setPosts(respone.data)
             console.log(respone.data);
         })
     }
     const deleteUser = (id) => {
-        axios.delete(`http://localhost:80/REACT/back_end_react/api/user.php/${id}/delete`).then((response)=>{
+        axios.delete(`http://localhost:80/REACT/back_end_react/api/post.php/${id}/delete`).then((response)=>{
             console.log(response.data);
             getUsers();
 
@@ -40,27 +40,23 @@ function ListUser(){
                 <tr bg="primary">
                     <th>#</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>password</th>
-                    <th>mobile</th>
-                    <th>created at</th>
+                    <th> Title </th>
+                    <th> Content </th>
                     <th>edit</th>
                     <th>delete</th>
                 </tr>
             </thead>
             <tbody>
 
-                {users.map((ele,index)=>{
-            return(
+                {posts.map((ele,index)=>{
+                        return(
                 <tr key={index}>
                     <td>{ele.id}</td>
                     <td>{ele.name}</td>
-                    <td>{ele.email}</td>
-                    <td>{ele.password}</td>
-                    <td>{ele.mobile}</td>
-                    <td>{ele.created_at}</td>
+                    <td>{ele.title}</td>
+                    <td>{ele.content}</td>
                     <td>
-                        <Link to={`/user/${ele.id}/edit`}>
+                        <Link to={`/post/${ele.id}/edit`}>
                             <Button variant="primary">Edit</Button>
                         </Link>
                     </td>
@@ -81,4 +77,4 @@ function ListUser(){
     )
 }
 
-export default ListUser
+export default ListPost
